@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.22)
+project(aoc2021 LANGUAGES CXX C)
+include_directories(/usr/local/include)
+link_directories(/usr/local/lib)
+
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+set(CMAKE_CXX_STANDARD 20)
+
+MACRO(SUBDIRLIST result curdir)
+  FILE(GLOB children RELATIVE ${curdir} ${curdir}/*)
+  SET(dirlist "")
+  FOREACH(child ${children})
+    IF(IS_DIRECTORY ${curdir}/${child})
+      LIST(APPEND dirlist ${child})
+    ENDIF()
+  ENDFOREACH()
+  SET(${result} ${dirlist})
+ENDMACRO()
+
+add_subdirectory(exercises)
+add_subdirectory(libs)
